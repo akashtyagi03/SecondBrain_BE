@@ -18,8 +18,8 @@ app.use(express.json());
 app.use(cors({
   origin: (origin, callback) => {
     const allowed = [
-      process.env.FRONTEND_URL,
-      process.env.VERCEL_URL
+      "http://localhost:5173",
+      "https://second-brain-fe-nine.vercel.app"
     ];
 
     if (!origin || allowed.includes(origin)) {
