@@ -54,7 +54,7 @@ app.post("/api/v1/signup", async(req: Request, res: Response) => {
         const hashedpassword = await bcrypt.hash(password, 5);
         const user = await User.create({ username, email, password: hashedpassword });
 
-        const token = jwt.sign({userId: user._id}, typeof process.env.JWT_SECRET);
+        const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET as string);
         res.json({
             message: "User signin successfully",
             token
@@ -88,7 +88,7 @@ app.post("/api/v1/signin", async(req: Request, res: Response    ) => {
             return res.status(400).json({ error: "Invalid username or password" });
         }
 
-        const token = jwt.sign({userId: user._id}, typeof process.env.JWT_SECRET);
+        const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET as string);
         res.json({
             message: "User signin successfully",
             token
